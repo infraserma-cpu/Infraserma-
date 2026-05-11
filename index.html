@@ -3,125 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عز الدين - النسخة الذكية</title>
+    <title>عز الدين - Infraserma</title>
     <style>
-        body {
-            background: #0f172a;
-            color: #fff;
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-
-        /* خلفية النجوم المتساقطة */
-        .stars {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-        }
-
-        .main-card {
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(15px);
-            width: 85%;
-            max-width: 380px;
-            padding: 30px;
-            border-radius: 30px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            animation: slideUp 0.8s ease;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        #greeting {
-            font-size: 1.2rem;
-            color: #00ff88;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        #clock {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin: 10px 0;
-            background: linear-gradient(to bottom, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 15px;
-            border: none;
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-            font-weight: bold;
-            transition: 0.3s;
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .btn:hover {
-            background: #00ff88;
-            color: #000;
-            transform: translateY(-3px);
-        }
-
-        .btn-wa { background: #25D366; color: white; border: none; }
+        :root { --primary: #00ff88; --bg: #0f172a; --card-bg: rgba(30, 41, 59, 0.8); }
+        body { background-color: var(--bg); color: #fff; font-family: sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .main-card { background: var(--card-bg); backdrop-filter: blur(15px); width: 90%; max-width: 400px; padding: 30px 20px; border-radius: 30px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
+        #clock { font-size: 2.8rem; font-weight: 800; margin: 10px 0; color: var(--primary); }
+        .btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; margin: 12px 0; border-radius: 15px; text-decoration: none; font-weight: bold; }
+        .btn-wa { background: #25D366; color: white; }
+        .btn-outline { background: rgba(255, 255, 255, 0.05); color: white; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .ad-container { margin-top: 25px; padding: 10px; border-radius: 20px; background: rgba(0,0,0,0.3); min-height: 100px; }
     </style>
 </head>
 <body>
-
-    <div class="stars"></div>
-
     <div class="main-card">
-        <div id="greeting">جاري التحميل...</div>
-        <div id="clock">00:00</div>
-        <h1 style="font-size: 22px; margin: 0;">عز الدين</h1>
-        <p style="color: #94a3b8; font-size: 14px;">مبتكر تقني | فاس 🇲🇦</p>
+        <div id="greeting" style="color: var(--primary); font-weight: bold;">ليلة سعيدة ✨</div>
+        <div id="clock">00:00:00</div>
+        <h1 style="font-size: 24px; margin: 5px 0;">عز الدين</h1>
+        <p style="color: #94a3b8; font-size: 14px; margin-bottom: 25px;">مبتكر تقني | فاس 🇲🇦</p>
 
-        <div style="margin-top: 20px;">
-            <a href="https://wa.me/212600000000" class="btn btn-wa">🟢 واتساب مباشر</a>
-            <a href="#" class="btn">🛡️ صيانة السيارات</a>
-            <a href="#" class="btn">⚡ مشاريع Arduino</a>
+        <a href="https://wa.me/212661680524" class="btn btn-wa">📱 واتساب مباشر</a>
+        <a href="#" class="btn btn-outline">🛠️ مشاريع Arduino</a>
+        <a href="#" class="btn btn-outline">🚗 صيانة Peugeot 407</a>
+
+        <div class="ad-container">
+            <script async="async" data-cfasync="false" src="https://pl29421713.profitablecpmratenetwork.com/70099a1518bd10ece70abdd0eb3f4d23/invoke.js"></script>
+            <div id="container-70099a1518bd10ece70abdd0eb3f4d23"></div>
         </div>
+
+        <div style="margin-top: 25px; font-size: 11px; color: #475569;">© 2026 Infraserma Tech</div>
     </div>
 
     <script>
-        function updateAll() {
+        function updateUI() {
             const now = new Date();
-            const hour = now.getHours();
-            
-            // تحديث الساعة
-            const timeStr = now.getHours().toString().padStart(2, '0') + ":" + 
-                            now.getMinutes().toString().padStart(2, '0');
-            document.getElementById('clock').innerText = timeStr;
-
-            // تحديث الترحيب الذكي
-            let msg = "";
-            if (hour >= 5 && hour < 12) msg = "صباح الخير ☀️";
-            else if (hour >= 12 && hour < 18) msg = "مساء الخير ☕";
-            else if (hour >= 18 && hour < 22) msg = "ليلة سعيدة ✨";
-            else msg = "عاشق الليل 🌙";
-            
-            document.getElementById('greeting').innerText = msg;
+            const h = now.getHours();
+            document.getElementById('clock').innerText = now.toLocaleTimeString('ar-MA', { hour12: false });
+            let message = (h >= 5 && h < 12) ? "صباح الخير ☀️" : (h >= 12 && h < 18) ? "مساء الخير ☕" : (h >= 18 && h < 22) ? "ليلة سعيدة ✨" : "عاشق الليل 🌙";
+            document.getElementById('greeting').innerText = message;
         }
-
-        setInterval(updateAll, 1000);
-        updateAll();
+        setInterval(updateUI, 1000); updateUI();
     </script>
 </body>
 </html>
