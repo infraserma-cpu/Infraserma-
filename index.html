@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>يومية Infraserma</title>
+    <style>
+        body { font-family: sans-serif; background: #f0f2f5; padding: 10px; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+        .day-box { background: white; border: 1px solid #ccc; padding: 10px; min-height: 80px; text-align: center; cursor: pointer; }
+        .day-box:hover { background: #eef; }
+        .day-box input { width: 90%; border: none; border-bottom: 1px solid #ddd; text-align: center; font-weight: bold; }
+        .total-section { margin-top: 20px; background: #28a745; color: white; padding: 15px; border-radius: 8px; text-align: center; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+
+    <h2>📅 يومية المصاريف والأيام</h2>
+    
+    <div class="calendar-grid">
+        <!-- الخانات ديال الأيام -->
+        <div class="day-box"><span>إثنين</span><input type="number" class="cost" placeholder="0"></div>
+        <div class="day-box"><span>ثلاثاء</span><input type="number" class="cost" placeholder="0"></div>
+        <div class="day-box"><span>أربعاء</span><input type="number" class="cost" placeholder="0"></div>
+        <div class="day-box"><span>خميس</span><input type="number" class="cost" placeholder="0"></div>
+        <div class="day-box"><span>جمعة</span><input type="number" class="cost" placeholder="0"></div>
+        <div class="day-box"><span>سبت</span><input type="number" class="cost" placeholder="0"></div>
+        <div class="day-box"><span>أحد</span><input type="number" class="cost" placeholder="0"></div>
+    </div>
+
+    <div class="total-section">
+        المجموع الكلي: <span id="grand-total">0</span> درهم
+    </div>
+
+    <script>
+        // كود الحساب التلقائي
+        const inputs = document.querySelectorAll('.cost');
+        const totalSpan = document.getElementById('grand-total');
+
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                let sum = 0;
+                inputs.forEach(i => sum += Number(i.value) || 0);
+                totalSpan.innerText = sum.toFixed(2);
+            });
+        });
+
+        // ميزة الضغط على الخانة لعرض معلومات (Alert)
+        document.querySelectorAll('.day-box').forEach(box => {
+            box.addEventListener('dblclick', () => {
+                let info = prompt("دخل تفاصيل هاد النهار (مثلا: تقضية سيمة):");
+                if(info) alert("تم الحفظ: " + info);
+            });
+        });
+    </script>
+</body>
+</html>
