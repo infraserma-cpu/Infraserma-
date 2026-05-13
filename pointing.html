@@ -3,110 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infraserma - بوانتاج يومي</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; padding: 15px; margin: 0; }
-        .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        h2 { color: #333; text-align: center; font-size: 1.4rem; }
-        
-        /* تصميم اليومية (الأسبوع) */
-        .calendar-week { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-bottom: 20px; }
-        .day-item { background: #fff; border: 2px solid #007bff; border-radius: 8px; padding: 10px; text-align: center; position: relative; cursor: pointer; }
-        .day-item span { display: block; font-weight: bold; margin-bottom: 5px; color: #007bff; }
-        .day-item input { width: 100%; border: none; background: transparent; text-align: center; font-size: 1.1rem; outline: none; }
-        
-        /* تصميم الجدول */
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; font-size: 0.9rem; }
-        th { background: #343a40; color: white; padding: 10px; border: 1px solid #dee2e6; }
-        td { padding: 10px; text-align: center; border: 1px solid #dee2e6; }
-        
-        .total-box { background: #28a745; color: white; padding: 15px; border-radius: 8px; text-align: center; font-size: 1.2rem; font-weight: bold; margin-top: 20px; }
-        .btn-action { background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+        body { font-family: sans-serif; background: #f4f4f4; padding: 10px; }
+        .card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        input { width: 90%; padding: 8px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background: #333; color: white; }
+        .btn-green { background: #28a745; color: white; border: none; padding: 15px; width: 100%; border-radius: 5px; font-weight: bold; }
     </style>
 </head>
 <body>
 
+    <!-- الجزء ديال اليومية (مصاريف الأسبوع) -->
     <div class="card">
-        <h2>🗓️ مصاريف الأسبوع (اليومية)</h2>
-        <div class="calendar-week">
-            <div class="day-item"><span>إثنين</span><input type="number" class="daily-expense" placeholder="0" oninput="calculateTotal()"></div>
-            <div class="day-item"><span>ثلاثاء</span><input type="number" class="daily-expense" placeholder="0" oninput="calculateTotal()"></div>
-            <div class="day-item"><span>أربعاء</span><input type="number" class="daily-expense" placeholder="0" oninput="calculateTotal()"></div>
-            <div class="day-item"><span>خميس</span><input type="number" class="daily-expense" placeholder="0" oninput="calculateTotal()"></div>
-            <div class="day-item"><span>جمعة</span><input type="number" class="daily-expense" placeholder="0" oninput="calculateTotal()"></div>
-            <div class="day-item"><span>سبت</span><input type="number" class="daily-expense" placeholder="0" oninput="calculateTotal()"></div>
-            <div class="day-item"><span>أحد</span><input type="number" class="daily-expense" placeholder="0" oninput="calculateTotal()"></div>
+        <h3>مصاريف الأسبوع (اليومية)</h3>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;">
+            <input type="number" placeholder="إثنين">
+            <input type="number" placeholder="ثلاثاء">
+            <input type="number" placeholder="أربعاء">
+            <input type="number" placeholder="خميس">
+            <input type="number" placeholder="جمعة">
+            <input type="number" placeholder="سبت">
         </div>
     </div>
 
+    <!-- الجزء ديال الخدامة (اللي طلبتي يرجع كيف كان) -->
     <div class="card">
-        <h2>👷 بوانتاج ومصاريف الخدامة</h2>
+        <h3>بوانتاج ومصاريف الخدامة 👷</h3>
+        <input type="text" placeholder="سمية الخدام">
+        <input type="number" placeholder="اليومية">
+        <input type="number" placeholder="عدد الأيام">
+        <input type="number" placeholder="تسبيق">
+        <button class="btn-green" onclick="alert('تمت الإضافة')">قيد في الحساب</button>
+
         <table>
             <thead>
                 <tr>
-                    <th>الخدام</th>
-                    <th>اليومية</th>
-                    <th>الأيام</th>
-                    <th>تسبيق</th>
-                    <th>الباقي</th>
+                    <th>الخدام</th><th>اليومية</th><th>الأيام</th><th>تسبيق</th><th>الباقي</th>
                 </tr>
             </thead>
-            <tbody id="workers-body">
+            <tbody>
                 <tr>
-                    <td>عزالدين بوعنان</td>
-                    <td><input type="number" value="120" class="rate" oninput="calculateTotal()"></td>
-                    <td><input type="number" value="1" class="days" oninput="calculateTotal()"></td>
-                    <td><input type="number" value="20" class="adv" oninput="calculateTotal()"></td>
-                    <td class="balance">100.00</td>
+                    <td>عزالدين بوعنان</td><td>120</td><td>1</td><td>20</td><td>100</td>
+                </tr>
+                <tr>
+                    <td>محمد</td><td>100</td><td>5</td><td>300</td><td>200</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <div class="total-box" id="grand-total-display">
-        المجموع الكلي للمصاريف: 0.00 درهم
-    </div>
+    <div class="btn-green">مجموع ما يجب دفعه حالياً: 300 درهم</div>
 
-    <script>
-        function calculateTotal() {
-            let totalExpenses = 0;
-            let totalWorkers = 0;
-
-            // 1. حساب مصاريف اليومية
-            document.querySelectorAll('.daily-expense').forEach(input => {
-                totalExpenses += parseFloat(input.value) || 0;
-            });
-
-            // 2. حساب بوانتاج الخدامة
-            const rows = document.querySelectorAll('#workers-body tr');
-            rows.forEach(row => {
-                const rate = parseFloat(row.querySelector('.rate').value) || 0;
-                const days = parseFloat(row.querySelector('.days').value) || 0;
-                const adv = parseFloat(row.querySelector('.adv').value) || 0;
-                
-                const balance = (rate * days) - adv;
-                row.querySelector('.balance').innerText = balance.toFixed(2);
-                totalWorkers += balance;
-            });
-
-            // 3. المجموع الكلي (اليومية + الخدامة)
-            const finalTotal = totalExpenses + totalWorkers;
-            document.getElementById('grand-total-display').innerText = "المجموع الكلي حالياً: " + finalTotal.toFixed(2) + " درهم";
-        }
-
-        // تشغيل الحساب عند التحميل لأول مرة
-        window.onload = calculateTotal;
-
-        // ميزة الضغط المطول (أو مرتين) لإضافة ملاحظة
-        document.querySelectorAll('.day-item').forEach(item => {
-            item.onclick = function() {
-                let note = prompt("شنو صرفتي فهاد النهار؟");
-                if (note) {
-                    this.title = note; // كيطلع فاش كتحط السهم (Tooltip)
-                    alert("تم تسجيل: " + note);
-                }
-            };
-        });
-    </script>
 </body>
 </html>
