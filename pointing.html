@@ -4,57 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { font-family: sans-serif; background: #f4f4f4; padding: 10px; }
-        .card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        input { width: 90%; padding: 8px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-        th { background: #333; color: white; }
-        .btn-green { background: #28a745; color: white; border: none; padding: 15px; width: 100%; border-radius: 5px; font-weight: bold; }
+        body { font-family: sans-serif; background: #f0f2f5; padding: 10px; margin: 0; }
+        .card { background: white; padding: 15px; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h3 { margin-top: 0; color: #333; font-size: 1.1rem; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        .grid-days { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .day-box { background: #f8f9fa; border: 1px solid #ddd; padding: 5px; border-radius: 8px; text-align: center; }
+        .day-box span { font-size: 0.8rem; font-weight: bold; color: #007bff; }
+        input { width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
+        th { background: #444; color: white; padding: 8px; }
+        td { border: 1px solid #ddd; padding: 8px; text-align: center; background: #fff; }
+        .total-banner { background: #28a745; color: white; padding: 15px; border-radius: 10px; text-align: center; font-weight: bold; font-size: 1.1rem; }
     </style>
 </head>
 <body>
 
-    <!-- الجزء ديال اليومية (مصاريف الأسبوع) -->
     <div class="card">
-        <h3>مصاريف الأسبوع (اليومية)</h3>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;">
-            <input type="number" placeholder="إثنين">
-            <input type="number" placeholder="ثلاثاء">
-            <input type="number" placeholder="أربعاء">
-            <input type="number" placeholder="خميس">
-            <input type="number" placeholder="جمعة">
-            <input type="number" placeholder="سبت">
+        <h3>🗓️ مصاريف الأسبوع (اليومية)</h3>
+        <div class="grid-days">
+            <div class="day-box"><span>إثنين</span><input type="number" class="day-exp" oninput="doMath()"></div>
+            <div class="day-box"><span>ثلاثاء</span><input type="number" class="day-exp" oninput="doMath()"></div>
+            <div class="day-box"><span>أربعاء</span><input type="number" class="day-exp" oninput="doMath()"></div>
+            <div class="day-box"><span>خميس</span><input type="number" class="day-exp" oninput="doMath()"></div>
+            <div class="day-box"><span>جمعة</span><input type="number" class="day-exp" oninput="doMath()"></div>
+            <div class="day-box"><span>سبت</span><input type="number" class="day-exp" oninput="doMath()"></div>
         </div>
     </div>
 
-    <!-- الجزء ديال الخدامة (اللي طلبتي يرجع كيف كان) -->
     <div class="card">
-        <h3>بوانتاج ومصاريف الخدامة 👷</h3>
-        <input type="text" placeholder="سمية الخدام">
-        <input type="number" placeholder="اليومية">
-        <input type="number" placeholder="عدد الأيام">
-        <input type="number" placeholder="تسبيق">
-        <button class="btn-green" onclick="alert('تمت الإضافة')">قيد في الحساب</button>
-
+        <h3>👷 بوانتاج الخدامة (الجدول الأصلي)</h3>
         <table>
             <thead>
                 <tr>
-                    <th>الخدام</th><th>اليومية</th><th>الأيام</th><th>تسبيق</th><th>الباقي</th>
+                    <th>الخدام</th>
+                    <th>يومية</th>
+                    <th>أيام</th>
+                    <th>تسبيق</th>
+                    <th>باقي</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="worker-table">
                 <tr>
-                    <td>عزالدين بوعنان</td><td>120</td><td>1</td><td>20</td><td>100</td>
+                    <td>عزالدين</td>
+                    <td><input type="number" class="rate" value="120" oninput="doMath()"></td>
+                    <td><input type="number" class="days" value="1" oninput="doMath()"></td>
+                    <td><input type="number" class="adv" value="20" oninput="doMath()"></td>
+                    <td class="res">100</td>
                 </tr>
-                <tr>
-                    <td>محمد</td><td>100</td><td>5</td><td>300</td><td>200</td>
-                </tr>
+                <!-- تقدر تزيد خدام آخر هنا -->
             </tbody>
         </table>
     </div>
 
-    <div class="btn-green">مجموع ما يجب دفعه حالياً: 300 درهم</div>
+    <div class="total-banner" id="final-res">
+        مجموع ما يجب دفعه حالياً: 100.00 درهم
+    </div>
 
+    <script>
+        function doMath() {
+            let totalDays = 0;
+            let totalWorkers = 0;
+
+            // حساب مصاريف الأيام
+            document.querySelectorAll('.day-exp').forEach(i => totalDays += parseFloat(i.value) || 0);
+
+            // حساب الخدامة
+            document.querySelectorAll('#worker-table tr').forEach(row => {
+                let r = parseFloat(row.querySelector('.rate').value) || 0;
+                let d = parseFloat(row.querySelector('.days').value) || 0;
+                let a = parseFloat(row.querySelector('.adv').value) || 0;
+                let balance = (r * d) - a;
+                row.querySelector('.res').innerText = balance.toFixed(2);
+                totalWorkers += balance;
+            });
+
+            document.getElementById('final-res').innerText = "المجموع الكلي: " + (totalDays + totalWorkers).toFixed(2) + " درهم";
+        }
+    </script>
 </body>
 </html>
